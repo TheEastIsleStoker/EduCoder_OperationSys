@@ -1,0 +1,49 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Reading symbols from tools/system...done.
+
+0x0000fff0 in sys_pipe (fildes=0x0 <startup_32>) at pipe.c:93
+93          current->filp[fd[0]]=NULL;
+
+(gdb) b 112
+Breakpoint 1 at 0x67a7: file init/main.c, line 112.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:112
+112     {
+1: current->pid = 0
+
+(gdb) b 145
+Breakpoint 2 at 0x68e8: file init/main.c, line 145.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, main () at init/main.c:145
+145             move_to_user_mode();
+1: current->pid = 0
+
+(gdb) n
+147             if (!fork()) {
+1: current->pid = 0
+
+(gdb) x/5i $eip
+=> 0x6903 <main+348>:    mov    $0x2,%eax
+   0x6908 <main+353>:    int    $0x80
+   0x690a <main+355>:    mov    %eax,-0x1c(%ebp)
+   0x690d <main+358>:    cmpl   $0x0,-0x1c(%ebp)
+   0x6911 <main+362>:    js     0x6918 <main+369>
+
+(gdb) p &current
+$1 = (struct task_struct **) 0x1fa20 <current>
+
+(gdb) p current
+$2 = (struct task_struct *) 0x1ea20 <init_task>
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y

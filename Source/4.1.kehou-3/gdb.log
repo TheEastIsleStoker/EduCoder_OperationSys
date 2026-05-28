@@ -1,0 +1,89 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Reading symbols from tools/system...done.
+
+(gdb) b sys_pause if current->pid==0
+Breakpoint 1 at 0x2f53: file sched.c, line 166.
+
+(gdb) b sys_pause if current->pid==1
+Breakpoint 2 at 0x2f53: file sched.c, line 166.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, sys_pause () at kernel/sched.c:166
+166             current->state = TASK_INTERRUPTIBLE;
+
+(gdb) info reg
+eax            0x1d     29
+ecx            0x0      0
+edx            0x0      0
+ebx            0x0      0
+esp            0x1ffb0  0x1ffb0
+ebp            0x1ffd8  0x1ffd8
+esi            0x0      0
+edi            0x0      0
+eip            0x2f53   0x2f53 <sys_pause>
+eflags         0x246    [ PF ZF IF ]
+cs             0x8      8
+ss             0x10     16
+ds             0x10     16
+es             0x10     16
+fs             0x17     23
+gs             0x17     23
+
+(gdb) p/x gdt
+$1 = {
+  {a = 0x0, b = 0x0},
+  {a = 0x7ff, b = 0x0},
+  {a = 0x7ff, b = 0x0}
+}
+
+0号进程执行到 sys_pause 时：
+CS = 0x8
+DS = 0x10
+CS 段基址 = 0x0
+DS 段基址 = 0x0
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, sys_pause () at kernel/sched.c:166
+166             current->state = TASK_INTERRUPTIBLE;
+
+(gdb) info reg
+eax            0x1d     29
+ecx            0x0      0
+edx            0x0      0
+ebx            0x0      0
+esp            0xfffb0  0xfffb0
+ebp            0xfffd8  0xfffd8
+esi            0x0      0
+edi            0x0      0
+eip            0x2f53   0x2f53 <sys_pause>
+eflags         0x246    [ PF ZF IF ]
+cs             0x8      8
+ss             0x10     16
+ds             0x10     16
+es             0x10     16
+fs             0x17     23
+gs             0x17     23
+
+(gdb) p/x gdt
+$2 = {
+  {a = 0x0, b = 0x0},
+  {a = 0x7ff, b = 0x0},
+  {a = 0x7ff, b = 0x0}
+}
+
+1号进程执行到 sys_pause 时：
+CS = 0x8
+DS = 0x10
+CS 段基址 = 0x0
+DS 段基址 = 0x0
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y

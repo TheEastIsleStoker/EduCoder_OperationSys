@@ -1,0 +1,52 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Reading symbols from tools/system...done.
+
+(gdb) b 155
+Breakpoint 1 at 0x6969: file init/main.c, line 155.
+
+(gdb) b *0x69d9
+Breakpoint 2 at 0x69d9.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+1: current->pid = 1
+
+(gdb) p/x $ldtr
+$1 = 0x0038
+
+(gdb) p $ldtr>>3
+$2 = 7
+
+(gdb) p/x &current->ldt
+$3 = 0xfff2d0
+
+(gdb) p/x current->ldt
+$4 = {{a = 0x0, b = 0x0}, {a = 0x9f, b = 0x4c0fb00}, {a = 0x9f, b = 0x4c0f300}}
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, 0x000069d9 in main ()
+1: current->pid = 0
+
+(gdb) p/x $ldtr
+$5 = 0x0028
+
+(gdb) p $ldtr>>3
+$6 = 5
+
+(gdb) p/x &current->ldt
+$7 = 0x1ed70
+
+(gdb) p/x current->ldt
+$8 = {{a = 0x0, b = 0x0}, {a = 0x9f, b = 0xc0fb00}, {a = 0x9f, b = 0xc0f300}}
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y

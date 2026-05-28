@@ -1,0 +1,45 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Reading symbols from tools/system...done.
+
+0x0000fff0 in sys_pipe (fildes=0x0 <startup_32>) at pipe.c:93
+93          current->filp[fd[0]]=NULL;
+
+(gdb) b 112
+Breakpoint 1 at 0x67a7: file init/main.c, line 112.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:112
+112     {
+1: current->pid = 0
+
+(gdb) b 156
+Breakpoint 2 at 0x6980: file init/main.c, line 156.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, main () at init/main.c:156
+156                         mynext++;
+1: current->pid = 1
+
+(gdb) x/8i $eip
+=> 0x6980 <main+473>:    mov    0x2282c,%eax
+   0x6985 <main+478>:    add    $0x1,%eax
+   0x6988 <main+481>:    mov    %eax,0x2282c
+   0x698d <main+486>:    movl   $0x1,-0x18(%ebp)
+   0x6994 <main+493>:    mov    $0x1b,%eax
+   0x6999 <main+498>:    mov    -0x18(%ebp),%edx
+   0x699c <main+501>:    mov    %edx,%ebx
+   0x699e <main+503>:    int    $0x80
+
+(gdb) p &mynext
+$1 = (int *) 0x2282c <mynext>
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y

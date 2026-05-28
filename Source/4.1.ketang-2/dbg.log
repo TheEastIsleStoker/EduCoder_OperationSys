@@ -1,0 +1,52 @@
+========================================================================
+                        Bochs x86 Emulator 2.6.9
+========================================================================
+
+Next at t=0 (0) [0x0000fffffff0] f000:fff0 (unk. ctxt): jmpf 0xf000:e05b
+
+(0) Breakpoint 1, 0x000069d9 in ?? ()
+Next at t=116317267 (0) [0x0000000069d9] 000f:000069d9 (unk. ctxt): mov eax, dword ptr ds:0x0002282c
+
+<bochs:1> sreg
+
+cs:0x000f, dh=0x00c0fb00, dl=0x0000009f, valid=1
+Code segment, base=0x00000000, limit=0x0009ffff, Execute/Read, Non-Conforming, Accessed, 32-bit
+
+ds:0x0017, dh=0x00c0f300, dl=0x0000009f, valid=3
+Data segment, base=0x00000000, limit=0x0009ffff, Read/Write, Accessed
+
+ss:0x0017, dh=0x00c0f300, dl=0x0000009f, valid=7
+Data segment, base=0x00000000, limit=0x0009ffff, Read/Write, Accessed
+
+ldtr:0x0028, dh=0x00008201, dl=0xed700068, valid=1
+tr:0x0020, dh=0x00008b01, dl=0xed880068, valid=1
+gdtr:base=0x00005cc0, limit=0x7ff
+idtr:base=0x000054c0, limit=0x7ff
+
+eax: 0x00000000
+ecx: 0x00000000
+edx: 0x00000000
+ebx: 0x00000000
+esp: 0x000257c0
+ebp: 0x000257e8
+eip: 0x000069d9
+eflags 0x00000293
+
+LDT selector = 0x0028
+LDT descriptor base = 0x0001ed70
+
+LDT[1]:
+Code segment descriptor
+base = 0x00000000
+limit = 0x0009ffff
+
+LDT[2]:
+Data segment descriptor
+base = 0x00000000
+limit = 0x0009ffff
+
+Logical address of mynext:
+0x17:0x2282c
+
+Linear address of mynext:
+0x00000000 + 0x2282c = 0x2282c

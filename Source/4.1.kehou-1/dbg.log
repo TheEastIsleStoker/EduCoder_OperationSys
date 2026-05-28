@@ -1,0 +1,44 @@
+========================================================================
+                        Bochs x86 Emulator 2.6.9
+========================================================================
+
+Next at t=0 (0) [0x0000fffffff0] f000:fff0 (unk. ctxt): jmpf 0xf000:e05b
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第一次执行 output_char
+1号进程 mynext = 1
+0号进程 mynext = 1
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第二次执行 output_char
+1号进程 mynext = 2
+0号进程 mynext = 7
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第三次执行 output_char
+1号进程 mynext = 3
+0号进程 mynext = 7
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第四次执行 output_char
+1号进程 mynext = 4
+0号进程 mynext = 7
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第五次执行 output_char
+1号进程 mynext = 5
+0号进程 mynext = 7
+
+Breakpoint 1, main () at init/main.c:155
+1号进程第六次执行 output_char
+1号进程 mynext = 6
+0号进程 mynext = 7
+
+1号进程 output_char 函数调用共执行 6 次
+每次调用时 1号进程和0号进程的 mynext 值依次为
+1 1
+2 7
+3 7
+4 7
+5 7
+6 7

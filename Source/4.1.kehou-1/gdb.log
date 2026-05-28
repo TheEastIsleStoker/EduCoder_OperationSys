@@ -1,0 +1,59 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Reading symbols from tools/system...done.
+
+(gdb) b 155
+Breakpoint 1 at 0x6969: file init/main.c, line 155.
+
+(gdb) b 172
+Breakpoint 2 at 0x6a32: file init/main.c, line 172.
+
+(gdb) commands 1
+Type commands for breakpoint 1, one per line.
+End with a line saying just "end".
+>x/wx 0x402282c
+>x/wx 0x2282c
+>c
+>end
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000001
+0x0002282c:     0x00000001
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000002
+0x0002282c:     0x00000007
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000003
+0x0002282c:     0x00000007
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000004
+0x0002282c:     0x00000007
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000005
+0x0002282c:     0x00000007
+
+Breakpoint 1, main () at init/main.c:155
+155                         output_char('A' + mynext);
+0x0402282c:     0x00000006
+0x0002282c:     0x00000007
+
+Breakpoint 2, main () at init/main.c:172
+172             for(;;) pause();
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y

@@ -1,0 +1,29 @@
+========================================================================
+                        Bochs x86 Emulator 2.6.9
+========================================================================
+
+0号进程执行到 sys_pause 时
+
+cs:0x0008, dh=0x00c09a00, dl=0x000007ff, valid=1
+Code segment, base=0x00000000, limit=0x007fffff, Execute/Read, Non-Conforming, Accessed, 32-bit
+
+ds:0x0010, dh=0x00c09200, dl=0x000007ff, valid=1
+Data segment, base=0x00000000, limit=0x007fffff, Read/Write, Accessed
+
+CS = 0x8
+DS = 0x10
+CS base = 0x0
+DS base = 0x0
+
+1号进程执行到 sys_pause 时
+
+cs:0x0008, dh=0x00c09a00, dl=0x000007ff, valid=1
+Code segment, base=0x00000000, limit=0x007fffff, Execute/Read, Non-Conforming, Accessed, 32-bit
+
+ds:0x0010, dh=0x00c09200, dl=0x000007ff, valid=1
+Data segment, base=0x00000000, limit=0x007fffff, Read/Write, Accessed
+
+CS = 0x8
+DS = 0x10
+CS base = 0x0
+DS base = 0x0

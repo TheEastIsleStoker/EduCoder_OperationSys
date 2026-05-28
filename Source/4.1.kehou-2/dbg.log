@@ -1,0 +1,41 @@
+========================================================================
+                        Bochs x86 Emulator 2.6.9
+========================================================================
+
+<bochs:1> b 0x6969
+<bochs:2> b 0x69d9
+<bochs:3> c
+
+Breakpoint 1, 0x00006969
+1号进程在用户态运行
+
+<bochs:4> sreg
+
+ldtr:0x0038, dh=0x000082ff, dl=0xf2d00068, valid=1
+tr:0x0030, dh=0x00008bff, dl=0xf2e80068, valid=1
+gdtr:base=0x00005cc0, limit=0x7ff
+
+LDTR = 0x0038
+0x0038 >> 3 = 7
+指向 GDT 中的 7 号描述符
+该 LDT 描述符中的段起始地址为 0x00fff2d0
+即 0xfff2d0
+它指向 1 号进程的 ldt 数组
+
+<bochs:5> c
+
+Breakpoint 2, 0x000069d9
+0号进程在用户态运行
+
+<bochs:6> sreg
+
+ldtr:0x0028, dh=0x00008201, dl=0xed700068, valid=1
+tr:0x0020, dh=0x00008b01, dl=0xed880068, valid=1
+gdtr:base=0x00005cc0, limit=0x7ff
+
+LDTR = 0x0028
+0x0028 >> 3 = 5
+指向 GDT 中的 5 号描述符
+该 LDT 描述符中的段起始地址为 0x0001ed70
+即 0x1ed70
+它指向 0 号进程的 ldt 数组
