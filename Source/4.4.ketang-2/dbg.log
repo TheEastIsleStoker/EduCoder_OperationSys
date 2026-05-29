@@ -1,0 +1,47 @@
+========================================================================
+                        Bochs x86 Emulator 2.6.9
+========================================================================
+
+Bochs x86 emulator, http://bochs.sourceforge.net/
+Bochs BIOS - build: 02/16/17
+ata0 master: Generic 1234 ATA-6 Hard-Disk ( 10 MBytes )
+
+Booting from Floppy...
+Loading system ...
+
+Partition table ok.
+5110/10240 free blocks
+3220/3424 free inodes
+3437 buffers = 3519488 bytes buffer space
+Free mem: 12582912 bytes
+Ok.
+
+[/usr/root]# mcopy /bin/sh b:
+Copying SH
+[/usr/root]#
+
+Write back changes to directory 'b'?
+Yes
+
+root@educoder:~/os/linux-0.11-lab# objdump -dlx b/sh | less
+
+b/sh:     文件格式 a.out-i386-linux
+b/sh
+体系结构: i386, 标志 0x00000182:
+EXEC_P, WP_TEXT, D_PAGED
+起始地址 0x00000000
+
+节：
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0002f000  00000000  00000000  00000400  2**3
+                  CONTENTS, ALLOC, LOAD, CODE
+  1 .data         00003000  0002f000  0002f000  0002f400  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          000012a8  00032000  00032000  00000000  2**3
+                  ALLOC
+SYMBOL TABLE:
+无符号
+
+Disassembly of section .text:
+
+00000000 <.text>:

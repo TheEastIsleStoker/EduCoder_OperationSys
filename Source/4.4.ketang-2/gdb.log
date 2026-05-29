@@ -1,0 +1,194 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+Reading symbols from tools/system...done.
+
+0x0000fff0 in sys_pipe (fildes=0x0 <startup_32>) at pipe.c:93
+93          current->filp[fd[0]]=NULL;
+
+(gdb) display current->pid
+1: current->pid = 0
+
+(gdb) b 112
+Breakpoint 1 at 0x67a7: file init/main.c, line 112.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:112
+112     {
+1: current->pid = 0
+
+(gdb) b do_execve
+Breakpoint 2 at 0xefb9: file exec.c, line 190.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_execve (eip=0xffbfec, tmp=30391, filename=0x1848c "/bin/sh",
+    argv=0x1e700 <argv_rc>, envp=0x1e708 <envp_rc>) at exec.c:190
+190     {
+1: current->pid = 2
+
+(gdb) p current->pid
+$1 = 2
+
+(gdb) x/s 0x8000000+filename
+0x801848c: "/bin/sh"
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y
+
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+Reading symbols from tools/system...done.
+
+0x0000fff0 in sys_pipe (fildes=0x0 <startup_32>) at pipe.c:93
+93          current->filp[fd[0]]=NULL;
+
+(gdb) display current->pid
+1: current->pid = 0
+
+(gdb) b 112
+Breakpoint 1 at 0x67a7: file init/main.c, line 112.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:112
+112     {
+1: current->pid = 0
+
+(gdb) b do_no_page
+Breakpoint 2 at 0xace6: file memory.c, line 367.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_no_page (error_code=4, address=134217728) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) b 376
+Breakpoint 3 at 0xad28: file memory.c, line 376.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_no_page (error_code=6, address=134410240) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_no_page (error_code=4, address=134395552) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_no_page (error_code=4, address=134376136) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_no_page (error_code=6, address=134425980) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) c
+Continuing.
+
+Breakpoint 3, do_no_page (error_code=6, address=134422528) at memory.c:376
+376             get_empty_page(address);
+1: current->pid = 2
+
+(gdb) p current->pid
+$2 = 2
+
+(gdb) p/x address
+$3 = 0x8032000
+
+(gdb) p/x address >> 22
+$4 = 0x20
+
+(gdb) p/x (address >> 12) & 0x3ff
+$5 = 0x32
+
+(gdb) x/wx 0x0+32*4
+0x80 <setup_idt+13>:     0x00ff7027
+
+(gdb) x/33wx 0x0
+0x0 <startup_32>:        0x00001027      0x00002007      0x00003007      0x00004027
+0x10 <startup_32+16>:    0x00000000      0x00026b50      0x00000000      0x00000000
+0x20 <startup_32+32>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x30 <startup_32+48>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x40 <startup_32+64>:    0x00ffe027      0x00000000      0x00000000      0x00000000
+0x50 <startup_32+80>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x60 <check_x87+6>:      0x00000000      0x00000000      0x00000000      0x00000000
+0x70 <check_x87+22>:     0x00000000      0x00000000      0x00000000      0x00000000
+0x80 <setup_idt+13>:     0x00ff7027
+
+(gdb) p/x 0xff7000+0x32*4
+$6 = 0xff70c8
+
+(gdb) x/wx 0xff70c8
+0xff70c8:       0x00000000
+
+(gdb) x/51wx 0xff7000
+0xff7000:       0x00ffa027      0x00000000      0x00000000      0x00000000
+0xff7010:       0x00000000      0x00000000      0x00ff5027      0x00000000
+0xff7020:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7030:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7040:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7050:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7060:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7070:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7080:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7090:       0x00000000      0x00000000      0x00ff3027      0x00000000
+0xff70a0:       0x00000000      0x00000000      0x00000000      0x00ff4027
+0xff70b0:       0x00000000      0x00000000      0x00000000      0x00ff6067
+0xff70c0:       0x00000000      0x00000000      0x00000000
+
+(gdb) n
+377             return;
+1: current->pid = 2
+
+(gdb) x/51wx 0xff7000
+0xff7000:       0x00ffa027      0x00000000      0x00000000      0x00000000
+0xff7010:       0x00000000      0x00000000      0x00ff5027      0x00000000
+0xff7020:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7030:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7040:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7050:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7060:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7070:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7080:       0x00000000      0x00000000      0x00000000      0x00000000
+0xff7090:       0x00000000      0x00000000      0x00ff3027      0x00000000
+0xff70a0:       0x00000000      0x00000000      0x00000000      0x00ff4027
+0xff70b0:       0x00000000      0x00000000      0x00000000      0x00ff6067
+0xff70c0:       0x00000000      0x00000000      0x00ff2007
+
+(gdb) x/wx 0xff70c8
+0xff70c8:       0x00ff2007
+
+(gdb) x/4wx 0xff2000
+0xff2000:       0x00000000      0x00000000      0x00000000      0x00000000
+
+(gdb) x/16xb 0xff2000
+0xff2000:       0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+0xff2008:       0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y
