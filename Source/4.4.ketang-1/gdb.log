@@ -1,0 +1,163 @@
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+Reading symbols from tools/system...done.
+
+0x0000fff0 in sys_pipe (fildes=0x0 <startup_32>) at pipe.c:93
+93          current->filp[fd[0]]=NULL;
+
+(gdb) display current->pid
+1: current->pid = 0
+
+(gdb) b 112
+Breakpoint 1 at 0x67a7: file init/main.c, line 112.
+
+(gdb) c
+Continuing.
+
+Breakpoint 1, main () at init/main.c:112
+112     {
+1: current->pid = 0
+
+(gdb) b do_execve
+Breakpoint 2 at 0xefb9: file exec.c, line 190.
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_execve (eip=0xffbfec, tmp=30391, filename=0x1848c "/bin/sh",
+    argv=0x1e700 <argv_rc>, envp=0x1e708 <envp_rc>) at exec.c:190
+190     {
+1: current->pid = 2
+
+(gdb) p current->pid
+$1 = 2
+
+(gdb) x/s 0x8000000+filename
+0x801848c: "/bin/sh"
+
+(gdb) c
+Continuing.
+
+Breakpoint 2, do_execve (eip=0xffbfec, tmp=30391, filename=0x1848c "/bin/sh",
+    argv=0x1e700 <argv_rc>, envp=0x1e708 <envp_rc>) at exec.c:190
+190     {
+1: current->pid = 2
+
+(gdb) b do_no_page
+Breakpoint 3 at 0xace6: file memory.c, line 367.
+
+(gdb) c
+Continuing.
+
+Breakpoint 3, do_no_page (error_code=4, address=134217728) at memory.c:367
+367     {
+1: current->pid = 2
+
+(gdb) p current->pid
+$2 = 2
+
+(gdb) p/x address
+$3 = 0x8000000
+
+(gdb) p/x current->start_code
+$4 = 0x8000000
+
+(gdb) p/x address >> 22
+$5 = 0x20
+
+(gdb) p/x ((address >> 22) * 4)
+$6 = 0x80
+
+(gdb) x/wx 0x80
+0x80 <setup_idt+13>:     0x00000000
+
+(gdb) x/33wx 0
+0x0 <startup_32>:        0x00001027      0x00002007      0x00003007      0x00004027
+0x10 <startup_32+16>:    0x00000000      0x0002685c      0x00000000      0x00000000
+0x20 <startup_32+32>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x30 <startup_32+48>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x40 <startup_32+64>:    0x00ffe027      0x00000000      0x00000000      0x00000000
+0x50 <startup_32+80>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x60 <check_x87+6>:      0x00000000      0x00000000      0x00000000      0x00000000
+0x70 <check_x87+22>:     0x00000000      0x00000000      0x00000000      0x00000000
+0x80 <setup_idt+13>:     0x00000000
+
+(gdb) b 381
+Breakpoint 4 at 0xad53: file memory.c, line 381.
+
+(gdb) b 387
+Breakpoint 5 at 0xadb5: file memory.c, line 387.
+
+(gdb) b 394
+Breakpoint 6 at 0xae22: file memory.c, line 394.
+
+(gdb) c
+Continuing.
+
+Breakpoint 4, do_no_page (error_code=4, address=134217728) at memory.c:381
+381             if (!(page = get_free_page()))
+1: current->pid = 2
+
+(gdb) n
+384             block = 1 + tmp/BLOCK_SIZE;
+1: current->pid = 2
+
+(gdb) p/x page
+$7 = 0xffa000
+
+(gdb) x/4wx 0xffa000
+0xffa000:       0x00000000      0x00000000      0x00000000      0x00000000
+
+(gdb) x/16xb 0xffa000
+0xffa000:       0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+0xffa008:       0x00    0x00    0x00    0x00    0x00    0x00    0x00    0x00
+
+(gdb) c
+Continuing.
+
+Breakpoint 5, do_no_page (error_code=4, address=134217728) at memory.c:387
+387             bread_page(page,current->executable->i_dev,nr);
+1: current->pid = 2
+
+(gdb) n
+388             i = tmp + 4096 - current->end_data;
+1: current->pid = 2
+
+(gdb) x/4wx 0xffa000
+0xffa000:       0x0824448b      0x02f000a3      0x0126e800      0x006a0000
+
+(gdb) x/16xb 0xffa000
+0xffa000:       0x8b    0x44    0x24    0x08    0xa3    0x00    0xf0    0x02
+0xffa008:       0x00    0xe8    0x26    0x01    0x00    0x00    0x6a    0x00
+
+(gdb) c
+Continuing.
+
+Breakpoint 6, do_no_page (error_code=4, address=134217728) at memory.c:394
+394             if (put_page(page,address))
+1: current->pid = 2
+
+(gdb) n
+395             return;
+1: current->pid = 2
+
+(gdb) x/33wx 0
+0x0 <startup_32>:        0x00001027      0x00002007      0x00003007      0x00004027
+0x10 <startup_32+16>:    0x00000000      0x000268ec      0x00000000      0x00000000
+0x20 <startup_32+32>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x30 <startup_32+48>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x40 <startup_32+64>:    0x00ffe027      0x00000000      0x00000000      0x00000000
+0x50 <startup_32+80>:    0x00000000      0x00000000      0x00000000      0x00000000
+0x60 <check_x87+6>:      0x00000000      0x00000000      0x00000000      0x00000000
+0x70 <check_x87+22>:     0x00000000      0x00000000      0x00000000      0x00000000
+0x80 <setup_idt+13>:     0x00ff7007
+
+(gdb) x/wx 0x00ff7000
+0xff7000:       0x00ffa007
+
+(gdb) quit
+A debugging session is active.
+
+Inferior 1 [Remote target] will be killed.
+
+Quit anyway? y
